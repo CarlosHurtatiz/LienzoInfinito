@@ -1,0 +1,18 @@
+<!doctype html><html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Infinite Canvas</title><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head><body>
+<header><div class="brand">✦ <b>Infinite Canvas</b></div><input id="name" value="Mi proyecto"><span id="status">Local</span>
+<div class="actions"><button id="projects">Proyectos</button><button id="save" class="primary">Guardar</button><button id="login">Iniciar sesión</button></div></header>
+<main><aside class="tools">
+<button data-tool="select" class="active">↖</button><button data-tool="pan">✋</button><i></i>
+<button data-tool="text">T</button><button data-tool="note">▤</button><button data-tool="image">▧</button><button data-tool="frame">□</button><button data-tool="connector">↗</button><i></i>
+<button id="undo">↶</button><button id="redo">↷</button><button id="fit">⌗</button><i></i><button id="png">PNG</button><button id="pdf">PDF</button></aside>
+<section id="view"><div id="world"><div id="layer"></div></div><div id="hint"><b>Tu lienzo está listo</b><span>Doble clic para crear texto</span></div>
+<div class="zoom"><button id="minus">−</button><span id="z">100%</span><button id="plus">+</button></div></section>
+<aside id="inspector"><b>Propiedades</b><button id="close">×</button><div id="props">Selecciona un elemento.</div></aside></main>
+<footer><span id="sel">0 seleccionados</span><span>Ctrl/Cmd+A · Ctrl/Cmd+S · Delete</span><span id="zf">100%</span></footer>
+<input id="file" type="file" accept="image/*" hidden>
+<div id="auth" class="modal hidden"><div class="card"><button data-x="auth">×</button><h2 id="at">Iniciar sesión</h2><input id="email" placeholder="Email"><input id="pass" type="password" placeholder="Contraseña"><button id="authgo" class="primary">Entrar</button><button id="switch">Crear una cuenta</button><p id="amsg"></p></div></div>
+<div id="pm" class="modal hidden"><div class="card wide"><button data-x="pm">×</button><h2>Mis proyectos</h2><button id="new" class="primary">+ Nuevo</button><div id="plist"></div></div></div>
+<script type="module" src="./js/app.js"></script></body></html>

@@ -1,0 +1,11 @@
+create table if not exists public.projects(id uuid primary key default gen_random_uuid(),user_id uuid not null references auth.users(id) on delete cascade,name text not null default 'Mi proyecto',data jsonb not null default '{"objects":[]}',created_at timestamptz not null default now(),updated_at timestamptz not null default now());
+alter table public.projects enable row level security;
+create policy "own select" on public.projects for select using(auth.uid()=user_id);
+create policy "own insert" on public.projects for insert with check(auth.uid()=user_id);
+create policy "own update" on public.projects for update using(auth.uid()=user_id);
+create policy "own delete" on public.projects for delete using(auth.uid()=user_id);
+insert into storage.buckets(id,name,public) values('canvas-assets','canvas-assets',true) on conflict(id) do nothing;
+create policy "asset read" on storage.objects for select using(bucket_id='canvas-assets');
+create policy "asset insert" on storage.objects for insert to authenticated with check(bucket_id='canvas-assets' and (storage.foldername(name))[1]=auth.uid()::text);
+create policy "asset update" on storage.objects for update to authenticated using(bucket_id='canvas-assets' and (storage.foldername(name))[1]=auth.uid()::text);
+create policy "asset delete" on storage.objects for delete to authenticated using(bucket_id='canvas-assets' and (storage.foldername(name))[1]=auth.uid()::text);
